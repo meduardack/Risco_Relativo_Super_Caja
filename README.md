@@ -1,15 +1,31 @@
 # 🏦 Análise de Risco de Crédito & Modelagem de Score (Banco Super Caja)
 
 ![SQL BigQuery](https://img.shields.io/badge/SQL-Google_BigQuery-4285F4?logo=googlebigquery&logoColor=white)
-![Python](https://img.shields.io/badge/Python-Pandas_%7C_Scikit--Learn-3776AB?logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-Google_Colab_%7C_Pandas-3776AB?logo=python&logoColor=white)
 ![Looker Studio](https://img.shields.io/badge/BI-Looker_Studio-4285F4?logo=looker&logoColor=white)
+![Laboratoria 2025](https://img.shields.io/badge/Jornada_de_Dados-Laboratória_2025-FF009E)
 ![Status](https://img.shields.io/badge/Recall_Inadimplência-84%25-success)
 
-> **Resumo Executivo:** Com o aumento da demanda por crédito e sobrecarga na avaliação manual, o banco **Super Caja** precisava automatizar a análise de solicitações para reduzir a inadimplência. Este projeto processou **36.000 clientes** e **305.335 registros de empréstimos** no Google BigQuery e Python, tratando inconsistências severas de renda/endividamento com flags analíticas e desenvolvendo um **Score de Risco Relativo** capaz de capturar **84% dos clientes inadimplentes reais (Recall)** em uma base fortemente desbalanceada (1,9% de default).
+**Autora:** Maria Eduarda Carvalho de Castro  
+**Contexto:** Projeto 3 desenvolvido na **Jornada de Dados da Laboratória (J01 — 2025)**
 
-🔗 **Links Rápidos:**
-- 📓 [Notebook Completo no Google Colab (Python, Correlações e Matrizes de Confusão)](https://colab.research.google.com/drive/1Yx-ip8KkN9QLWg-nfWph80RyN7PJzWO3?usp=sharing)
-- 📄 [Relatório Técnico Completo com Prints e Gráficos (PDF)](./reports/PROJETO_3_RISCO_RELATIVO.pdf)
+> **Resumo Executivo:** Com o aumento da demanda por crédito e sobrecarga na avaliação manual, o banco **Super Caja** precisava automatizar a análise de solicitações para reduzir a inadimplência. Este projeto processou **36.000 clientes** e **305.335 registros de empréstimos** utilizando **SQL no Google BigQuery** e **Python no Google Colab**, tratando inconsistências severas de renda/endividamento com flags analíticas e desenvolvendo um **Score de Risco Relativo** capaz de capturar **84% dos clientes inadimplentes reais (Recall)** em uma base fortemente desbalanceada (1,9% de default).
+
+---
+
+## 🔗 Links e Entregáveis do Projeto
+
+- 📓 [**Relatório Completo do Projeto no Notion**](https://app.notion.com/p/PROJETO-3_-RISCO-RELATIVO-20db5d32202880f2b216c1479d4a976b?source=copy_link) *(Documentação passo a passo, decisões de negócio, gráficos e dashboard)*
+- 💻 [**Notebook no Google Colab (Python)**](https://colab.research.google.com/drive/1Yx-ip8KkN9QLWg-nfWph80RyN7PJzWO3?usp=sharing) *(Análise exploratória, mapas de calor de correlação, testes de dispersão e validação com Matriz de Confusão)*
+
+---
+
+## 🛠️ Linguagens e Ferramentas Utilizadas
+
+- **SQL + Google BigQuery:** Tratamento e limpeza da base de dados, detecção de outliers (IQR e Z-Score), criação de views limpas, segmentação por quartis (`NTILE(4)`) e construção do Score de Risco Relativo.
+- **Python + Google Colab:** Análise exploratória complementar, medidas de tendência central e dispersão, matriz de correlação, testes estatísticos, criação de gráficos e validação do score com Matriz de Confusão.
+- **Looker Studio:** Visualização executiva e criação do dashboard interativo.
+- **Notion:** Gestão e documentação completa do processo analítico.
 
 ---
 
@@ -22,7 +38,7 @@ O processo manual de concessão de crédito do **Banco Super Caja** gerava garga
 
 ---
 
-## 2. Arquitetura de Dados e Decisões de Engenharia (SQL / BigQuery)
+## 2. Arquitetura de Dados e Decisões Analíticas (SQL / BigQuery)
 
 Em vez de excluir registros discrepantes e perder quase 21% da base de clientes, o pipeline no BigQuery foi desenhado com **views limpas e flags de diagnóstico**:
 
@@ -30,7 +46,7 @@ Em vez de excluir registros discrepantes e perder quase 21% da base de clientes,
 | :--- | :--- | :--- |
 | **1. Limpeza e Padronização** | `view_user_info_limpo` / `view_emprestimos_limpos` | Tratamento de nulos (`COALESCE` em salário e dependentes) e padronização de `loan_type` (`real estate` vs `other`) com `CASE WHEN LOWER(...)`. |
 | **2. Detecção de Outliers (IQR + Z-Score)** | `view_infopagamento_limpo` | Identificação do limite superior de `debt_ratio` via IQR ($1.92$) e de uso de limite rotativo (`using_lines_not_secured` $> 1.33$). |
-| **3. Engenharia de Variáveis (Feature Engineering)** | `caja_unificada` | Criação de `renda_per_capita`, `qtd_emprestimos`, `tipo_frequente` (via `ROW_NUMBER() OVER (PARTITION BY user_id)`), `debt_categoria`, `debt_status` e `lines_categoria`. |
+| **3. Engenharia de Variáveis** | `caja_unificada` | Criação de `renda_per_capita`, `qtd_emprestimos`, `tipo_frequente` (via `ROW_NUMBER() OVER (PARTITION BY user_id)`), `debt_categoria`, `debt_status` e `lines_categoria`. |
 
 ---
 
@@ -62,12 +78,10 @@ Como apenas **1,9%** da base era inadimplente, avaliar o modelo por *Acurácia* 
 ## 5. Estrutura do Repositório
 
 ```text
-credit-risk-super-caja/
-├── README.md                                       # Documentação executiva e resultados
-├── sql/
-│   ├── 01_data_cleaning_and_views.sql              # Auditoria de nulos/duplicados e views limpas
-│   ├── 02_outliers_iqr_and_flags.sql               # Tratamento de outliers (IQR/Z-Score) e flags de risco
-│   └── 03_caja_unificada_and_relative_risk.sql     # Feature engineering, quartis e cálculo de Score
-└── reports/
-    └── PROJETO_3_RISCO_RELATIVO.pdf                # Ficha técnica completa com gráficos e matrizes
+Risco_Relativo_Super_Caja/
+├── README.md                                       # Documentação executiva, links e resultados
+└── sql/
+    ├── 01_data_cleaning_and_views.sql              # Auditoria de nulos/duplicados e views limpas
+    ├── 02_outliers_iqr_and_flags.sql               # Tratamento de outliers (IQR/Z-Score) e flags de risco
+    └── 03_caja_unificada_and_relative_risk.sql     # Feature engineering, quartis e cálculo de Score
 ```
