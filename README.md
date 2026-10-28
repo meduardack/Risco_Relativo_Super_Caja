@@ -1,5 +1,7 @@
 # 🏦 Análise de Risco de Crédito & Modelagem de Score (Banco Super Caja)
 
+> 🌐 **Language / Idioma:** [English](README_en.md) • **Português**
+
 ![SQL BigQuery](https://img.shields.io/badge/SQL-Google_BigQuery-4285F4?logo=googlebigquery&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-Google_Colab_%7C_Pandas-3776AB?logo=python&logoColor=white)
 ![Looker Studio](https://img.shields.io/badge/BI-Looker_Studio-4285F4?logo=looker&logoColor=white)
