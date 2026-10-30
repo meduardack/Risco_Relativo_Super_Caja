@@ -1,6 +1,6 @@
-# 🏦 Credit Risk Analysis & Default Scoring Model (Banco Super Caja)
+# Credit Risk Analysis & Default Scoring Model (Banco Super Caja)
 
-> 🌐 **Language / Idioma:** **English** • [Português](README.md)
+>  **Language / Idioma:** **English** • [Português](README.md)
 
 ![SQL BigQuery](https://img.shields.io/badge/SQL-Google_BigQuery-4285F4?logo=googlebigquery&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-Google_Colab_%7C_Pandas-3776AB?logo=python&logoColor=white)
@@ -15,14 +15,14 @@
 
 ---
 
-## 🔗 Project Deliverables & Links
+## Project Deliverables & Links
 
-- 📓 [**Complete Technical Project Spec on Notion**](https://app.notion.com/p/PROJETO-3_-RISCO-RELATIVO-20db5d32202880f2b216c1479d4a976b?source=copy_link) *(Step-by-step documentation, business rationale, charts, and interactive dashboard)*
-- 💻 [**Interactive Google Colab Notebook (Python)**](https://colab.research.google.com/drive/1Yx-ip8KkN9QLWg-nfWph80RyN7PJzWO3?usp=sharing) *(Exploratory Data Analysis, correlation heatmaps, distribution diagnostics, and Confusion Matrix threshold validation)*
+-  [**Complete Technical Project Spec on Notion**](https://app.notion.com/p/PROJETO-3_-RISCO-RELATIVO-20db5d32202880f2b216c1479d4a976b?source=copy_link) *(Step-by-step documentation, business rationale, charts, and interactive dashboard)*
+-  [**Interactive Google Colab Notebook (Python)**](https://colab.research.google.com/drive/1Yx-ip8KkN9QLWg-nfWph80RyN7PJzWO3?usp=sharing) *(Exploratory Data Analysis, correlation heatmaps, distribution diagnostics, and Confusion Matrix threshold validation)*
 
 ---
 
-## 🛠️ Tech Stack & Methodologies
+## Tech Stack & Methodologies
 
 - **SQL + Google BigQuery:** Data preprocessing, outlier detection (IQR & Z-Score), analytical view layering, quartile segmentation (`NTILE(4)`), and Relative Risk computation.
 - **Python + Google Colab:** Exploratory Data Analysis (EDA), dispersion and central tendency metrics, correlation matrix modeling, statistical testing, visual storytelling, and Confusion Matrix trade-off calibration.

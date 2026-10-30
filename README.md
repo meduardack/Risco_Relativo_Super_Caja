@@ -1,6 +1,6 @@
-# 🏦 Análise de Risco de Crédito & Modelagem de Score (Banco Super Caja)
+# Análise de Risco de Crédito & Modelagem de Score (Banco Super Caja)
 
-> 🌐 **Language / Idioma:** [English](README_en.md) • **Português**
+>  **Language / Idioma:** [English](README_en.md) • **Português**
 
 ![SQL BigQuery](https://img.shields.io/badge/SQL-Google_BigQuery-4285F4?logo=googlebigquery&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-Google_Colab_%7C_Pandas-3776AB?logo=python&logoColor=white)
@@ -15,14 +15,14 @@
 
 ---
 
-## 🔗 Links e Entregáveis do Projeto
+## Links e Entregáveis do Projeto
 
-- 📓 [**Relatório Completo do Projeto no Notion**](https://app.notion.com/p/PROJETO-3_-RISCO-RELATIVO-20db5d32202880f2b216c1479d4a976b?source=copy_link) *(Documentação passo a passo, decisões de negócio, gráficos e dashboard)*
-- 💻 [**Notebook no Google Colab (Python)**](https://colab.research.google.com/drive/1Yx-ip8KkN9QLWg-nfWph80RyN7PJzWO3?usp=sharing) *(Análise exploratória, mapas de calor de correlação, testes de dispersão e validação com Matriz de Confusão)*
+-  [**Relatório Completo do Projeto no Notion**](https://app.notion.com/p/PROJETO-3_-RISCO-RELATIVO-20db5d32202880f2b216c1479d4a976b?source=copy_link) *(Documentação passo a passo, decisões de negócio, gráficos e dashboard)*
+-  [**Notebook no Google Colab (Python)**](https://colab.research.google.com/drive/1Yx-ip8KkN9QLWg-nfWph80RyN7PJzWO3?usp=sharing) *(Análise exploratória, mapas de calor de correlação, testes de dispersão e validação com Matriz de Confusão)*
 
 ---
 
-## 🛠️ Linguagens e Ferramentas Utilizadas
+## Linguagens e Ferramentas Utilizadas
 
 - **SQL + Google BigQuery:** Tratamento e limpeza da base de dados, detecção de outliers (IQR e Z-Score), criação de views limpas, segmentação por quartis (`NTILE(4)`) e construção do Score de Risco Relativo.
 - **Python + Google Colab:** Análise exploratória complementar, medidas de tendência central e dispersão, matriz de correlação, testes estatísticos, criação de gráficos e validação do score com Matriz de Confusão.
@@ -70,7 +70,7 @@ Como apenas **1,9%** da base era inadimplente, avaliar o modelo por *Acurácia* 
 | :--- | :---: | :---: | :---: | :---: | :--- |
 | **Caso 01 — Score $\ge 3$** | 570 | 113 | 9.007 | 83% | Boa captura, mas mais falsos positivos |
 | **Caso 01 — Score $\ge 4$** | 384 | 299 | 3.357 | 56% | Alto risco de inadimplência não prevista |
-| **🏆 Caso 02 — Score $\ge 3$** | **573** | **110** | **8.642** | **84%** | **Melhor equilíbrio (Mais seguro contra default)** |
+| ** Caso 02 — Score $\ge 3$** | **573** | **110** | **8.642** | **84%** | **Melhor equilíbrio (Mais seguro contra default)** |
 | **Caso 02 — Score $\ge 4$** | 377 | 306 | 3.294 | 55% | Privilegia aprovação rápida, mas deixa passar 45% dos defaults |
 
 > **Recomendação Executiva:** Adotar o **Score $\ge 3$ do Caso 02**, que captura **84% dos inadimplentes reais (573 de 683)** e reduz em **365 clientes** o volume de falsos positivos em relação ao Caso 01.
